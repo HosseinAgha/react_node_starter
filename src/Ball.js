@@ -2,7 +2,10 @@
 require('./Ball.css');
 
 module.exports = class Ball {
-  constructor(parent){
+  constructor(parent, initPosition){
+    if(initPosition == null) {
+      initPosition = { left: 0, top: 0 };
+    }
     var ball = document.createElement('div');
     ball.style.width = "100px";
     ball.style.height = "100px";
@@ -10,24 +13,31 @@ module.exports = class Ball {
     ball.style.borderRadius = "50%";
     ball.className = "ballContainer";
     this.elem = ball;
-    this.position = { left: 0, top: 0 }
+    this.setPosition(initPosition);
     this.speed = 300;
     parent.appendChild(ball);
   }
+  addClickListener(func) {
+    this.elem.addEventListener("click", func);
+  }
+  turnOff() {
+    this.elem.style.backgroundColor = "black"
+  }
   goLeft() {
-    this.changePosition({ top: this.position.top, left: this.position.left - this.speed })
+    var obj = { top: this.position.top, left: this.position.left - this.speed };
+    this.setPosition(obj);
   }
   goUp() {
-    this.changePosition({ top: this.position.top - this.speed, left: this.position.left })
+    this.setPosition({ top: this.position.top - this.speed, left: this.position.left })
   }
   goRight() {
-    this.changePosition({ top: this.position.top, left: this.position.left + this.speed })
+    this.setPosition({ top: this.position.top, left: this.position.left + this.speed })
   }
   goDown() {
-    this.changePosition({ top: this.position.top + this.speed, left: this.position.left })
+    this.setPosition({ top: this.position.top + this.speed, left: this.position.left })
   }
-  changePosition(newPosition) {
+  setPosition(newPosition) {
     this.position = newPosition;
-    this.elem.style.transform = "translate(" + (newPosition.left - 50) + "px, " + (newPosition.top - 50) + "px" + ")";
+    this.elem.style.transform = "translate" + "(" + (newPosition.left - 50) + "px, " + (newPosition.top - 50) + "px" + ")";
   }
 }
