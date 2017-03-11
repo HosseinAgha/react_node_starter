@@ -12,6 +12,10 @@ document.addEventListener("keydown", function(event){
   }
 });
 
+document.addEventListener("mousemove", function(event){
+  var pos1 = { left: event.clientX, top: event.clientY };
+  b1.changePosition(pos1);
+})
 // import React from 'react'; // ES6 - ES5
 // import ReactDOM from 'react-dom';
 // import { AppContainer } from 'react-hot-loader';

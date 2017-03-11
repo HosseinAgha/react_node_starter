@@ -11,23 +11,23 @@ module.exports = class Ball {
     ball.className = "ballContainer";
     this.elem = ball;
     this.position = { left: 0, top: 0 }
-    this.speed = 50;
+    this.speed = 300;
     parent.appendChild(ball);
   }
   goLeft() {
-    this._changePosition({ top: this.position.top, left: this.position.left - this.speed })
+    this.changePosition({ top: this.position.top, left: this.position.left - this.speed })
   }
   goUp() {
-    this._changePosition({ top: this.position.top - this.speed, left: this.position.left })
+    this.changePosition({ top: this.position.top - this.speed, left: this.position.left })
   }
   goRight() {
-    this._changePosition({ top: this.position.top, left: this.position.left + this.speed })
+    this.changePosition({ top: this.position.top, left: this.position.left + this.speed })
   }
   goDown() {
-    this._changePosition({ top: this.position.top + this.speed, left: this.position.left })
+    this.changePosition({ top: this.position.top + this.speed, left: this.position.left })
   }
-  _changePosition(newPosition) {
+  changePosition(newPosition) {
     this.position = newPosition;
-    this.elem.style.transform = "translate(" + newPosition.left + "px, " + newPosition.top + "px" + ")";
+    this.elem.style.transform = "translate(" + (newPosition.left - 50) + "px, " + (newPosition.top - 50) + "px" + ")";
   }
 }
